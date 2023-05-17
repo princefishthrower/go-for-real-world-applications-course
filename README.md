@@ -1,5 +1,3 @@
-# Lesson 10
+# Lesson 11
 
-Create a Slack App and Messaging Function
-
-Slack app URL: https://api.slack.com
+Completing `main.go`
