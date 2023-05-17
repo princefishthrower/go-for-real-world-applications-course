@@ -16,7 +16,7 @@ func main() {
 	}
 
 	cronJob := cron.NewWithLocation(loc)
-	cronJob.AddFunc("0 0 8 * * *", func() {
+	cronJob.AddFunc("0 15 12 * * *", func() {
 		dailyAverageMessage, err := allergy_api.GetHourlyLoadData()
 		if err != nil {
 			panic(err)
@@ -35,4 +35,8 @@ func main() {
 
 		log.Println("Successfully sent Slack message: " + slackMessage)
 	})
+
+	cronJob.Start()
+
+	select {}
 }

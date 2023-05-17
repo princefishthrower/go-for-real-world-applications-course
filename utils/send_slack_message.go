@@ -11,7 +11,7 @@ func SendSlackMessage(message string) error {
 		return err
 	}
 
-	MakeHTTPRequest("https://hooks.slack.com/services/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", "POST", nil, nil, bytes.NewBuffer(body), "")
+	MakeHTTPRequest("https://hooks.slack.com/services/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", "POST", nil, nil, bytes.NewBuffer(body), "")
 
 	return nil
 }
