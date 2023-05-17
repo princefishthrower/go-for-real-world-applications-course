@@ -1,3 +1,5 @@
-# Lesson 9
+# Lesson 10
 
-Calling the Allergy API and Parsing the Response
+Create a Slack App and Messaging Function
+
+Slack app URL: https://api.slack.com
