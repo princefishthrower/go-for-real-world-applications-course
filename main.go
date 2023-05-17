@@ -15,4 +15,8 @@ func main() {
 	cronJob := cron.NewWithLocation(loc)
 	cronJob.AddFunc("0 0 8 * * *", func() {
 	})
+
+	cronJob.Start()
+
+	select {}
 }
