@@ -35,4 +35,8 @@ func main() {
 
 		log.Println("Successfully sent Slack message: " + slackMessage)
 	})
+
+	cronJob.Start()
+
+	select {}
 }
