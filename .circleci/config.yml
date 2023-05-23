@@ -42,6 +42,9 @@ jobs:
             echo ALLERGY_API_URL_ROOT=${ALLERGY_API_URL_ROOT} >> .env
             echo CRON_TIMEZONE=${CRON_TIMEZONE} >> .env
             echo CRON_SCHEDULE=${CRON_SCHEDULE} >> .env
+      - persist_to_workspace:
+          paths:
+            - .env
       - run:
           name: Run tests
           command: go test -p 1 -v ./tests
