@@ -3,7 +3,6 @@ package main
 import (
 	"allergycron/allergy_api"
 	"allergycron/utils"
-	"fmt"
 	"log"
 	"os"
 	"time"
@@ -22,9 +21,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	// print CRON_SCHEDULE to terminal
-	fmt.Println("CRON_SCHEDULE: " + os.Getenv("CRON_SCHEDULE"))
 
 	cronJob := cron.NewWithLocation(loc)
 	cronJob.AddFunc(os.Getenv("CRON_SCHEDULE"), func() {
