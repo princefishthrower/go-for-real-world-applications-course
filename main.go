@@ -22,13 +22,6 @@ func main() {
 		panic(err)
 	}
 
-	// log CRON_SCHEDULE to stdout
-	log.Println(os.Getenv("CRON_SCHEDULE"))
-
-	// log entire env to stdout
-	log.Println(os.Environ())
-	log.Println(os.Environ())
-
 	cronJob := cron.NewWithLocation(loc)
 	cronJob.AddFunc(os.Getenv("CRON_SCHEDULE"), func() {
 		dailyAverageMessage, err := allergy_api.GetHourlyLoadData()

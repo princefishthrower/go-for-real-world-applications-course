@@ -42,7 +42,7 @@ jobs:
             echo SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL} >> .env
             echo ALLERGY_API_URL_ROOT=${ALLERGY_API_URL_ROOT} >> .env
             echo CRON_TIMEZONE=${CRON_TIMEZONE} >> .env
-            echo CRON_SCHEDULE="${CRON_SCHEDULE}" >> .env
+            echo CRON_SCHEDULE=${CRON_SCHEDULE} >> .env
       - run:
           name: Run tests
           command: go test -p 1 -v ./tests
