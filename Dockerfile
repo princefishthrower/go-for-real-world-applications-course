@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY . .
 
-COPY .env /app/
-
 RUN go build -o /allergycron
 
 CMD [ "/allergycron" ]
