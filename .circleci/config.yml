@@ -10,6 +10,7 @@ workflows:
               only:
                 - main
       - docker/publish:
+          attach-at: ./
           image: $DOCKER_USERNAME/$DOCKER_REPONAME
           requires:
             - test
@@ -45,3 +46,7 @@ jobs:
       - run:
           name: Run tests
           command: go test -p 1 -v ./tests
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .env
