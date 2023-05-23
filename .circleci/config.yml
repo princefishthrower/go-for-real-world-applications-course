@@ -10,6 +10,7 @@ workflows:
               only:
                 - pipeline
       - docker/publish:
+          attach-at: ./
           image: $DOCKER_USERNAME/$DOCKER_REPONAME
           requires:
             - test
