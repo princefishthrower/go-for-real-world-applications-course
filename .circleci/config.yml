@@ -1,0 +1,47 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@2.2.0
+workflows:
+  production:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - main
+      - docker/publish:
+          image: $DOCKER_USERNAME/$DOCKER_REPONAME
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - main
+jobs:
+  test:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/go:1.20.4
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - go-mod-v4-{{ checksum "go.sum" }}
+      - run:
+          name: Install Dependencies
+          command: go get ./...
+      - save_cache:
+          key: go-mod-v4-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
+      - run:
+          name: Create .env file
+          command: |
+            touch .env
+            echo SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL} >> .env
+            echo ALLERGY_API_URL_ROOT=${ALLERGY_API_URL_ROOT} >> .env
+            echo CRON_TIMEZONE=${CRON_TIMEZONE} >> .env
+            echo CRON_SCHEDULE=${CRON_SCHEDULE} >> .env
+      - run:
+          name: Run tests
+          command: go test -p 1 -v ./tests
