@@ -50,7 +50,7 @@ func GetHourlyLoadData() (*string, error) {
 
 	scaledAverageLoad := averageLoad / 2
 
-	formattedMessage := fmt.Sprintf("The average pollen load for today is %d", scaledAverageLoad)
+	formattedMessage := formatAllergyData(scaledAverageLoad)
 
 	return &formattedMessage, nil
 }
@@ -82,4 +82,25 @@ func GetCurrentChartData() (*string, error) {
 	formattedMessage := fmt.Sprintf("Historically, the average pollen load for today is %d", scaledAverageHistorical)
 
 	return &formattedMessage, nil
+}
+
+func formatAllergyData(scaledAverageLoad int) string {
+	formattedMessage := fmt.Sprintf("The average pollen load for today is %d", scaledAverageLoad)
+
+	switch {
+	case scaledAverageLoad == 1:
+		return "🟡 Okay. " + formattedMessage + " (LOW). 🟡"
+
+	case scaledAverageLoad == 2:
+		return "🟠 Watch out! " + formattedMessage + " (MEDIUM)! 🟠"
+	case scaledAverageLoad == 3:
+		return "🔴 Warning! " + formattedMessage + " (HIGH)! 🔴"
+	case scaledAverageLoad == 4:
+		return "🔴🔴🔴 Alert! " + formattedMessage + " (VERY HIGH)! 🔴🔴🔴"
+	case scaledAverageLoad == 0:
+		fallthrough
+	default:
+		return "🟢 Nice! " + formattedMessage + " (NONE). 🟢"
+	}
+
 }

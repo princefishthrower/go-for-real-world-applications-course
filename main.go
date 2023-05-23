@@ -16,7 +16,7 @@ func main() {
 	}
 
 	cronJob := cron.NewWithLocation(loc)
-	cronJob.AddFunc("0 0 8 * * *", func() {
+	cronJob.AddFunc("0 19 15 * * *", func() {
 		dailyAverageMessage, err := allergy_api.GetHourlyLoadData()
 		if err != nil {
 			panic(err)
