@@ -4,19 +4,26 @@ import (
 	"allergycron/allergy_api"
 	"allergycron/utils"
 	"log"
+	"os"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/robfig/cron"
 )
 
 func main() {
-	loc, err := time.LoadLocation("Europe/Vienna")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	loc, err := time.LoadLocation(os.Getenv("CRON_TIMEZONE"))
 	if err != nil {
 		panic(err)
 	}
 
 	cronJob := cron.NewWithLocation(loc)
-	cronJob.AddFunc("0 19 15 * * *", func() {
+	cronJob.AddFunc(os.Getenv("CRON_SCHEDULE"), func() {
 		dailyAverageMessage, err := allergy_api.GetHourlyLoadData()
 		if err != nil {
 			panic(err)

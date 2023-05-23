@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"net/url"
+	"os"
 	"time"
 )
 
@@ -37,7 +38,7 @@ func GetHourlyLoadData() (*string, error) {
 	queryParameters.Add("country", "AT")
 	queryParameters.Add("pure_json", "1")
 
-	response, err := utils.MakeHTTPRequest("https://www.pollenwarndienst.at/index.php", "GET", nil, queryParameters, nil, HourlyLoadResponse{})
+	response, err := utils.MakeHTTPRequest(os.Getenv("ALLERGY_API_URL_ROOT"), "GET", nil, queryParameters, nil, HourlyLoadResponse{})
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +65,7 @@ func GetCurrentChartData() (*string, error) {
 	queryParameters.Add("season", "2")
 	queryParameters.Add("pure_json", "1")
 
-	response, err := utils.MakeHTTPRequest("https://www.pollenwarndienst.at/index.php", "GET", nil, queryParameters, nil, CurrentChartDataResponse{})
+	response, err := utils.MakeHTTPRequest(os.Getenv("ALLERGY_API_URL_ROOT"), "GET", nil, queryParameters, nil, CurrentChartDataResponse{})
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +91,6 @@ func formatAllergyData(scaledAverageLoad int) string {
 	switch {
 	case scaledAverageLoad == 1:
 		return "🟡 Okay. " + formattedMessage + " (LOW). 🟡"
-
 	case scaledAverageLoad == 2:
 		return "🟠 Watch out! " + formattedMessage + " (MEDIUM)! 🟠"
 	case scaledAverageLoad == 3:

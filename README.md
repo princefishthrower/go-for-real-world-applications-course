@@ -1,3 +1,3 @@
-# Lesson 16
+# Lesson 17
 
-Adding Fancy Formatting to the Slack Messages
+Move Secrets and Hardcoded Values to an .env File

@@ -3,6 +3,7 @@ package utils
 import (
 	"bytes"
 	"encoding/json"
+	"os"
 )
 
 func SendSlackMessage(message string) error {
@@ -11,7 +12,7 @@ func SendSlackMessage(message string) error {
 		return err
 	}
 
-	MakeHTTPRequest("https://hooks.slack.com/services/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", "POST", nil, nil, bytes.NewBuffer(body), "")
+	MakeHTTPRequest(os.Getenv("SLACK_WEBHOOK_URL"), "POST", nil, nil, bytes.NewBuffer(body), "")
 
 	return nil
 }
