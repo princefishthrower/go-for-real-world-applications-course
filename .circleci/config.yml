@@ -8,7 +8,7 @@ workflows:
           filters:
             branches:
               only:
-                - main
+                - pipeline
       - docker/publish:
           image: $DOCKER_USERNAME/$DOCKER_REPONAME
           requires:
@@ -16,7 +16,7 @@ workflows:
           filters:
             branches:
               only:
-                - main
+                - pipeline
 jobs:
   test:
     working_directory: ~/repo
