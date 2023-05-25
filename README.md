@@ -1,5 +1,3 @@
-# Lesson 18
+# Lesson 19
 
-Special Pipeline Branch to test the pipeline
-
-Create a CI/CD Pipeline with Circle CI
+This lesson is the conclusion. No code was written in this lesson but this code should reflect the final state of the entire project.
